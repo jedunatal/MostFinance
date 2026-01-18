@@ -1,59 +1,83 @@
-Finance App - Smart Management
-A responsive financial management system focused on cash flow, expense classification (Essential vs. Non-Essential), and investment goal tracking.
+# 💰 Most Finance – Financial control and management application.
 
-🚀 Project Status
-This project follows the Scrum methodology. Currently, the base infrastructure (Docker/Laravel) is completed.
+![Laravel](https://img.shields.io/badge/Laravel-11-red)
+![PHP](https://img.shields.io/badge/PHP-8.2+-blue)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED)
+![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-🛠️ Tech Stack
-Back-end: Laravel 11 (PHP 8.2+)
+A **responsive financial management system** focused on **cash flow**, **expense classification (Essential vs. Non-Essential)**, and **investment goal tracking**.
 
-Database: MySQL 8.0
+---
 
-Infrastructure: Docker & Docker Compose
+## 📖 About the Project
 
-Front-end: Tailwind CSS & Blade Templates
+The **Finance App – Smart Management** helps users:
 
-Charts: Chart.js
+- Track income and expenses  
+- Classify expenses as **Essential** or **Non-Essential**  
+- Calculate **free-to-spend balance** in real time  
+- Visualize financial data using charts  
+- Manage financial goals
 
-⚙️ Environment Setup (Local)
-To run this project locally, follow these steps:
+The project follows **clean architecture principles**, focusing on scalability, security, and maintainability.
 
-Clone the repository:
+---
 
-Bash
+## 🚀 Project Status
 
-git clone https://github.com/your-username/your-project.git
-cd your-project
-Environment Configuration:
+🧩 **Methodology:** Scrum  
+🏗️ **Current Stage:** Base infrastructure completed
 
-Copy the example file: cp .env.example .env
+### ✅ Completed
+- Docker environment
+- Laravel 11 setup
+- Database configuration
 
-Configure ports and credentials in .env as documented in Jira.
+### 🔄 In Progress
+- Business rules
+- Expense logic
+- Charts & reports
 
-Spin up containers:
+---
 
-Bash
+## 🛠️ Tech Stack
 
-docker-compose up -d
-Install dependencies and generate key:
+**Back-end**
+- Laravel 11
+- PHP 8.2+
 
-Bash
+**Database**
+- MySQL 8.0
 
-docker exec -it [container_name] composer install
-docker exec -it [container_name] php artisan key:generate
-Run Migrations:
+**Infrastructure**
+- Docker
+- Docker Compose
 
-Bash
+**Front-end**
+- Tailwind CSS
+- Blade Templates
 
-docker exec -it [container_name] php artisan migrate
-📋 Mapped Features (Jira Epics)
-MF-6 Authentication & Users: Secure access management.
+**Charts**
+- Chart.js
+- 
+---
 
-MF-38 Spending Balance: Real-time logic for calculating free-to-spend balance.
+## ⚙️ Environment Setup
 
-MF-43 Expense Control: Classification between Essential and Non-Essential spending.
+---
 
-MF-13 Charts & Reports: Financial data visualization.
+### 🔹 Prerequisites
 
-🔒 Security & Privacy
-The project implements data isolation policies (Owner Only) and strict input validation to ensure financial integrity.
+Make sure you have installed:
+
+- Git
+- Docker
+- Docker Compose
+
+Check installation:
+```bash
+git --version
+docker --version
+docker-compose --version
+
