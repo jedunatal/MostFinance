@@ -63,8 +63,56 @@ The project follows **clean architecture principles**, focusing on scalability, 
 - 
 ---
 
-## ⚙️ Environment Setup
+🏗️ System Architecture
+<pre> 
+    classDiagram
+    class User {
+        +BigInt id
+        +String name
+        +String email
+        +Hash password
+        +calculateFreeBalance() Decimal
+        +getTotalFixedExpenses() Decimal
+        +getTotalMonthlyIncome() Decimal
+    }
 
+    class Transaction {
+        +BigInt id
+        +BigInt user_id
+        +BigInt category_id
+        +String description
+        +Decimal amount
+        +Date date
+        +Enum type
+        +Boolean is_essential
+        +Boolean is_fixed
+        +markAsPaid() Boolean
+        +duplicateAsRecurring() void
+    }
+
+    class Category {
+        +BigInt id
+        +String name
+        +String icon
+        +String color_hex
+        +getTransactionsCount() Integer
+    }
+
+    class Goal {
+        +BigInt id
+        +BigInt user_id
+        +String title
+        +Decimal target_amount
+        +Decimal current_amount
+        +Date deadline
+        +getProgressPercentage() Float
+        +addDeposit(amount) void
+    }
+
+    User "1" --> "*" Transaction : owns
+    User "1" --> "*" Goal : tracks
+    Category "1" --> "*" Transaction : classifies
+</pre>
 ---
 
 ### 🔹 Prerequisites
@@ -80,4 +128,5 @@ Check installation:
 git --version
 docker --version
 docker-compose --version
+
 
