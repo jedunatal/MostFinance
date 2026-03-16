@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'occupation',      // Profissão
+        'phone',           // Telefone
+        'birth_date',      // Data de Nascimento
+        'currency',        // Moeda (BRL, USD, etc)
+        'initial_balance', // Saldo Inicial
     ];
 
     /**
@@ -43,6 +48,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date', // Garante que o Laravel trate como objeto Carbon (data)
+            'initial_balance' => 'decimal:2', // Mantém as duas casas decimais nos cálculos
         ];
     }
 }
