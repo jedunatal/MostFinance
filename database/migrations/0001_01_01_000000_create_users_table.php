@@ -17,6 +17,19 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // --- CAMPOS PERSONALIZADOS MOSTFINANCE ---
+            $table->string('occupation')->nullable();     // Profissão
+            $table->string('phone')->nullable();          // Telefone/WhatsApp
+            $table->date('birth_date')->nullable();       // Data de Nascimento
+            
+            // Finanças
+            $table->string('currency', 3)->default('BRL'); // Moeda
+            $table->decimal('initial_balance', 15, 2)->default(0); // Saldo Inicial
+            
+            // Controle de Acesso (Login Único)
+            $table->boolean('is_admin')->default(false); // Define se vai para /admin ou /dashboard
+            
             $table->rememberToken();
             $table->timestamps();
         });

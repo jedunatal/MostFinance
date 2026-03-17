@@ -2,36 +2,34 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Os atributos que podem ser preenchidos em massa.
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'occupation',      // Profissão
-        'phone',           // Telefone
-        'birth_date',      // Data de Nascimento
-        'currency',        // Moeda (BRL, USD, etc)
-        'initial_balance', // Saldo Inicial
+        'occupation',
+        'phone',
+        'birth_date',
+        'currency',
+        'initial_balance',
+        'is_admin', // Adicionado para o controle de acesso
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * Atributos escondidos para serialização.
      */
     protected $hidden = [
         'password',
@@ -39,17 +37,34 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Casts de atributos.
      */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'birth_date' => 'date', // Garante que o Laravel trate como objeto Carbon (data)
-            'initial_balance' => 'decimal:2', // Mantém as duas casas decimais nos cálculos
+            'birth_date' => 'date',
+            'initial_balance' => 'decimal:2',
+            'is_admin' => 'boolean', // Garante que retorne true/false
         ];
+    }
+
+    /**
+     * Implementação do FilamentUser: Define quem acessa o /admin
+     */
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        // Se estiver tentando entrar no Admin, checa se é administrador
+        if ($panel->getId() === 'admin') {
+            return (bool) $this->is_admin;
+        }
+
+        // Se estiver tentando entrar no App (Dashboard), todos logados entram
+        if ($panel->getId() === 'app') {
+            return true;
+        }
+
+        return false;
     }
 }

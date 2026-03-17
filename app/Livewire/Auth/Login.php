@@ -30,7 +30,14 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             session()->regenerate();
-            return redirect()->intended('/dashboard');
+
+            $user = Auth::user();
+
+            if ($user->is_admin) {
+                return redirect()->intended('/admin');
+            }
+
+            return redirect()->intended(filament()->getPanel('app')->getUrl());
         }
 
         $this->addError('email', 'Credenciais inválidas.');
